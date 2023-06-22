@@ -1,0 +1,47 @@
+﻿@page "/additem";
+@inject IAddInventoryItemCommand AddInventoryItemCommand;
+@inject NavigationManager NavigationManager
+
+<h3>Add Inventory Item</h3>
+<br />
+<EditForm Model="_inventoryItem" OnValidSubmit="SaveItem">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="name">Item Name</label>
+        <InputText id="name" @bind-Value="_inventoryItem.Name" class="form-control" />
+    </div>    
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <InputNumber id="quantity" @bind-Value="_inventoryItem.Quantity" 
+            class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="purchase-price">Purchase Price</label>
+        <InputNumber id="purchase-price" @bind-Value="_inventoryItem.PurchasePrice" 
+            class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <InputText id="description" @bind-Value="_inventoryItem.Description" 
+            class="form-control" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-primary" @onclick="Cancel">Cancel</button>
+</EditForm>
+@code {
+    private InventoryItem _inventoryItem = new();
+
+    private async Task SaveItem()
+    {
+        await AddInventoryItemCommand.ExecuteAsync(_inventoryItem);
+        NavigationManager.NavigateTo("/inventory");
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/inventory");
+    }
+
+}

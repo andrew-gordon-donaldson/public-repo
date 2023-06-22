@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorServerApp\Data\IMS.Tutorial.Data.InMemoryPlugin\IMS.Tutorial.Data.InMemoryPlugin.csproj" />
+    <ProjectReference Include="..\IMS.Tutorial.UseCases\IMS.Tutorial.UseCases.csproj" />
+  </ItemGroup>
+
+</Project>

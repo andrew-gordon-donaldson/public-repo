@@ -1,0 +1,15 @@
+﻿@inject IGetInventoryItemsByNameContaining ViewInventoryByName;
+
+<InventoryItemComponent InventoryItems="@_inventoryItems"></InventoryItemComponent>
+
+@code {
+private List<InventoryItem> _inventoryItems = new List<InventoryItem>();
+
+[Parameter]
+public string SearchTerm { get; set; } = string.Empty;
+
+protected override async Task OnParametersSetAsync()
+{
+    _inventoryItems = (await ViewInventoryByName.ExecuteAsync(SearchTerm)).ToList();
+}
+}

@@ -1,0 +1,40 @@
+﻿@inject NavigationManager NavigationManager;
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Purchase Price</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in InventoryItems)
+    {
+        <tr>
+                <td>@item.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.PurchasePrice.ToString("c")</td>
+                <td>@item.Description</td>
+                <td>
+                    <button type="button" class="btn btn-light"
+                    @onclick="@(()=>OnEdit(item.Id))">
+                        Edit
+                    </button>
+                </td>
+            </tr>
+    }
+    </tbody>
+</table>
+@code {
+[Parameter]
+public List<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
+
+public async Task OnEdit(int itemId)
+{
+    NavigationManager.NavigateTo($"/updateitem/{itemId}");
+    await Task.CompletedTask;
+}
+}

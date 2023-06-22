@@ -1,0 +1,25 @@
+﻿@page "/"
+
+@inject IGetInventoryItemsByNameContaining ViewInventoryByName
+
+<PageTitle>View Inventory by Name</PageTitle>
+
+<ul>
+    @foreach(var item in _inventoryItems)
+{
+   <li>@item.Name</li> 
+}
+</ul>
+
+
+
+@code{
+private List<InventoryItem> _inventoryItems = new List<InventoryItem>();
+
+protected override async Task OnInitializedAsync()
+{
+    _inventoryItems = (await ViewInventoryByName.ExecuteAsync()).ToList();
+
+    await base.OnInitializedAsync();        
+}
+}
